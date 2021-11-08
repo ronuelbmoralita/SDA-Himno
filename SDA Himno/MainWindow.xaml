@@ -1,0 +1,517 @@
+﻿<Window x:Class="SDA_Hymn.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SDA_Hymn"
+        mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"  FontFamily="Consolas" FontSize="20" WindowState="Maximized" Width="auto" WindowStyle="None" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded" ResizeMode="NoResize" Closed="Window_Closed">
+    <Window.Resources>
+        <Storyboard x:Key="OpenMenu">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="gridMenu">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="-800"/>
+            </DoubleAnimationUsingKeyFrames>
+
+        </Storyboard>
+
+        <Storyboard x:Key="CloseMenu">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="gridMenu">
+                <EasingDoubleKeyFrame KeyTime="0" Value="-800"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <!--Animation-->
+        <Storyboard x:Key="OpenNavBar">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="NavBar">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="250"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <Storyboard x:Key="CloseNavBar">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="NavBar">
+                <EasingDoubleKeyFrame KeyTime="0" Value="250"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
+    </Window.Resources>
+
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="Open">
+            <BeginStoryboard Storyboard="{StaticResource OpenMenu}"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="buttonClose">
+            <BeginStoryboard Storyboard="{StaticResource CloseMenu}"/>
+        </EventTrigger>
+
+        <!---->
+
+        <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="ButtonOpenNav">
+            <BeginStoryboard Storyboard="{StaticResource OpenNavBar}"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="ButtonCloseNav">
+            <BeginStoryboard Storyboard="{StaticResource CloseNavBar}"/>
+        </EventTrigger>
+    </Window.Triggers>
+
+
+
+    <!--technical support-->
+
+    <materialDesign:DialogHost Name="openTechnical" BorderBrush="{DynamicResource MaterialDesignDivider}">
+        <materialDesign:DialogHost.DialogContent>
+            <Grid Width="auto" Height="450">
+                <materialDesign:Card Visibility="Hidden" UniformCornerRadius="0.1" Height="30" VerticalAlignment="Top" Background="#FF3580BF"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="top" Margin="0" Background="#FF3580BF">
+                    <Button x:Name="ButtonBack" 
+                            Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
+                            Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" 
+                            Width="30" 
+                            Height="30" 
+                            Padding="0" 
+                            Background="{x:Null}" 
+                            BorderBrush="{x:Null}" 
+                            Margin="0"
+                            ToolTip="Close">
+                        <materialDesign:PackIcon Kind="Close" Width="15" Height="15"/>
+                    </Button>
+                </StackPanel>
+                <StackPanel Visibility="Visible" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="40">
+                    <Image Width="auto" Height="60" Source="Assets/gcash-logo.png" Stretch="UniformToFill"/>
+                    <Image Width="180" Height="180" Source="Assets/gcash-ron.jpg" Stretch="UniformToFill"/>
+                    <!--
+                    <Button x:Name="Button" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" BorderBrush="{x:Null}" Padding="0" Width="180" Height="180">
+                        <Button.Background>
+                            <ImageBrush ImageSource="Assets/gcash.jpg" Stretch="UniformToFill"/>
+                        </Button.Background>
+                    </Button>
+                    -->
+                </StackPanel>
+              
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="40" Height="auto" VerticalAlignment="Bottom">
+                    <StackPanel Visibility="Collapsed">
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <TextBox Name="nameDev" Height="auto" BorderThickness="1" TextWrapping="Wrap" Width="300" materialDesign:HintAssist.Hint="Name" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <TextBox Name="emailDev" Height="auto" BorderThickness="1" TextWrapping="Wrap" Width="300" materialDesign:HintAssist.Hint="Your Email" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <TextBox Name="messageDev" Height="100" BorderThickness="1" TextWrapping="Wrap" Width="300" materialDesign:HintAssist.Hint="Message" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Code" Foreground="{StaticResource PrimaryHueMidBrush}" Width="30" Height="30" Margin="5"/>
+                        <TextBlock Text="Ronuel B. Moralita" ToolTip="Developer" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Gray"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Gmail" Foreground="#EA4335" Width="30" Height="30" Margin="5"/>
+                        <TextBlock ToolTip="Gmail" VerticalAlignment="Center" HorizontalAlignment="Center">
+                           <Hyperlink Foreground="Gray" NavigateUri="mailto:moralitaronuel@gmail.com" RequestNavigate="Hyperlink_RequestNavigate">
+                               moralitaronuel@gmail.com
+                           </Hyperlink>
+                        </TextBlock>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Facebook" Foreground="#3b5998" Width="30" Height="30" Margin="5"/>
+                        <TextBlock ToolTip="Facebook" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Gray">
+                              <Hyperlink Foreground="Gray" NavigateUri="https://www.facebook.com/ronuel06" RequestNavigate="Hyperlink_RequestNavigate">
+                               ronuel06
+                           </Hyperlink>
+                        </TextBlock>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel Visibility="Hidden" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="10">
+                    <Button Name="sendEmail" Content="Send" Width="80" Height="30"/>
+                </StackPanel>
+            </Grid>
+        </materialDesign:DialogHost.DialogContent>
+
+        <Grid>
+            <Grid.Background>
+                <ImageBrush ImageSource="/Assets/sdalogo.png" Stretch="Uniform" Opacity="0.2"/>
+            </Grid.Background>
+
+            <materialDesign:Card UniformCornerRadius="0.1" Height="40" VerticalAlignment="Top"  Background="#4CAF50" />
+            <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top">
+                 <Button x:Name="ButtonOpenNav" 
+                            Margin="5"
+                            Width="30"
+                            Height="30" 
+                            Padding="0" 
+                            Background="{x:Null}" 
+                            BorderBrush="{x:Null}" 
+                            VerticalAlignment="Top" 
+                            HorizontalAlignment="Left"
+                            ToolTip="Menu">
+                    <materialDesign:PackIcon Kind="Menu" Width="20" Height="20"/>
+                </Button>
+            </StackPanel>
+
+            <!--<materialDesign:Card  Width="auto" Height="50" Background="#FFC107" VerticalAlignment="Top"/>
+        -->
+            <StackPanel HorizontalAlignment="Right" Height="auto" VerticalAlignment="Top" Margin="0" Width="650">
+                <StackPanel Orientation="Horizontal">
+                    <TextBox Name="bindTitleFront" 
+                             Visibility="Hidden"
+                            Width="200" 
+                            Text="{Binding ElementName=titleSearchFront, Path=Text}"
+                            HorizontalAlignment="Center" 
+                            FontSize="12"
+                            Height="30"
+                            TextChanged="BindTitleFront_TextChanged"/>
+                  
+                    <ComboBox Width="300"
+                                  Margin="5"
+                                  Background="White"
+                                  IsEditable="True"
+                                  x:Name="titleSearchFront" 
+                                  Height="30"
+                                  VerticalAlignment="Top"
+                                  BorderThickness="1"
+                                  IsTextSearchEnabled="True"
+                                  KeyUp="TitleSearchFront_KeyUp" SelectionChanged="TitleSearchFront_SelectionChanged">
+                        <materialDesign:HintAssist.Hint>
+                            <StackPanel Orientation="Horizontal" Margin="-2 0 0 0">
+                                <materialDesign:PackIcon Kind="Search" />
+                                <TextBlock Text="Himno Search" />
+                            </StackPanel>
+                        </materialDesign:HintAssist.Hint>
+                         <ComboBox.ItemsPanel>
+                             <ItemsPanelTemplate>
+                                 <VirtualizingStackPanel VirtualizingStackPanel.IsVirtualizing="True" VirtualizingStackPanel.VirtualizationMode="Recycling"/>
+                             </ItemsPanelTemplate>
+                         </ComboBox.ItemsPanel>
+                    </ComboBox>
+                </StackPanel>
+
+
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Height="30" Margin="0,5,5,0" Width="auto" VerticalAlignment="Top" HorizontalAlignment="Right">
+                <Button x:Name="Open"
+                                Width="30" 
+                                Height="30" 
+                                Padding="0" 
+                                Background="{x:Null}" 
+                                BorderBrush="{x:Null}" 
+                                ToolTip="Edit himno" Click="Open_Click">
+                    <materialDesign:PackIcon Kind="Edit" Width="20" Height="20"/>
+                </Button>
+                <Button x:Name="Minimize" 
+                                Width="30" 
+                                Height="30" 
+                                Padding="0" 
+                                Background="{x:Null}" 
+                                BorderBrush="{x:Null}" 
+                                Click="Minimize_Click"
+                                ToolTip="Minimize">
+                    <materialDesign:PackIcon Kind="WindowMinimize" Width="20" Height="20"/>
+                </Button>
+                <Button x:Name="ButtonClose" 
+                                Width="30" 
+                                Height="30" 
+                                Padding="0" 
+                                Background="{x:Null}" 
+                                BorderBrush="{x:Null}" 
+                                Click="ButtonClose_Click"
+                                ToolTip="Close">
+                    <materialDesign:PackIcon Kind="Close" Width="20" Height="20"/>
+                </Button>
+            </StackPanel>
+
+            
+            <Grid Margin="0,40,0,0" Height="auto">
+                <TextBox TextWrapping="Wrap" 
+                         BorderThickness="0"
+                         VerticalScrollBarVisibility="Visible" 
+                         Margin="0" 
+                         FontWeight="UltraBold" 
+                         FontSize="80" 
+                         HorizontalAlignment="Stretch" 
+                         Name="displayContent" 
+                         Height="auto"  
+                         VerticalAlignment="Bottom" 
+                         Width="auto"/>
+            </Grid>
+
+
+
+            <!--
+                <StackPanel Height="250" VerticalAlignment="Bottom" Width="100" HorizontalAlignment="Right" Grid.Row="1">
+
+                    <Label Content="Up" Foreground="White" VerticalContentAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" Margin="0"/>
+
+
+                    <Button x:Name="upButton" Style="{DynamicResource MaterialDesignFloatingActionButton}"
+                                                    VerticalAlignment="Center"
+                                                    Margin="20" Width="57" RenderTransformOrigin="0.5,0.5" Click="UpButton_Click"  
+                                                    >
+                        <materialDesign:PackIcon Kind="ArrowUp" Width="30" Height="30"/>
+                        <Button.ToolTip>
+                            <ToolTip Content="Save case"/>
+                        </Button.ToolTip>
+                    </Button>
+
+
+                    <Button x:Name="downButton" Style="{DynamicResource MaterialDesignFloatingActionButton}"
+                                                    VerticalAlignment="Center"
+                                                    Margin="20" Width="57" RenderTransformOrigin="0.5,0.5"  Click="DownButton_Click"
+                                                    >
+                        <materialDesign:PackIcon Kind="ArrowBottom" Width="30" Height="30"/>
+                        <Button.ToolTip>
+                            <ToolTip Content="Save case"/>
+                        </Button.ToolTip>
+                    </Button>
+                    <Label Content="Down" Foreground="White" VerticalContentAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" Margin="0"/>
+                </StackPanel>
+                  -->
+
+
+            <!--navBar-->
+
+            <Grid x:Name="NavBar" Width="250" Height="auto" HorizontalAlignment="Left"  Margin="-250,0,0,0" Background="#4CAF50"  RenderTransformOrigin="0.5,0.5" Grid.RowSpan="2">
+                <Grid.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Grid.RenderTransform>
+
+                <StackPanel Height="auto">
+                    <StackPanel Orientation="Vertical" VerticalAlignment="Center" Margin="80">
+                        <Image Source="Assets/sdaLogo.png" Width="100" Height="100"/>
+                    </StackPanel>
+                    <ListView FontSize="20">
+
+                        <ListViewItem Name="support" Height="45" Padding="0" MouseLeftButtonUp="ListViewItem_Support">
+                            <StackPanel Orientation="Horizontal" Margin="10 0">
+                                <materialDesign:PackIcon Kind="Donate" Width="20" Height="20" Margin="5" VerticalAlignment="Center"/>
+                                <TextBlock Text="Donate" Margin="10"/>
+                            </StackPanel>
+                        </ListViewItem>
+
+
+                        <ListViewItem Name="ButtonCloseListItem" Height="45" Padding="0" MouseLeftButtonUp="ButtonCloseListItem_MouseLeftButtonUp">
+                            <StackPanel Orientation="Horizontal" Margin="10 0">
+                                <materialDesign:PackIcon Kind="Close" Width="20" Height="20" Margin="5" VerticalAlignment="Center"/>
+                                <TextBlock Text="Exit" Margin="10"/>
+                            </StackPanel>
+                        </ListViewItem>
+                    </ListView>
+                </StackPanel>
+                <StackPanel  HorizontalAlignment="Right" VerticalAlignment="Top">
+                    <Button x:Name="ButtonCloseNav" 
+                                Margin="5"
+                                Width="30" 
+                                Height="30" 
+                                Padding="0" 
+                                Background="{x:Null}" 
+                                BorderBrush="{x:Null}" 
+                                ToolTip="Close">
+                        <materialDesign:PackIcon Kind="Close" Width="20" Height="20"/>
+                    </Button>
+                </StackPanel>
+            </Grid>
+
+
+
+
+            <!--editAddNavBar-->
+
+            <Grid x:Name="gridMenu" Width="800" Height="auto" Background="Wheat" HorizontalAlignment="Right" RenderTransformOrigin="0.5,0.5"  Margin="0,0,-800,0" Grid.RowSpan="2">
+                <Grid.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Grid.RenderTransform>
+                <materialDesign:Card  Width="auto" Height="auto" VerticalAlignment="Top"/>
+                <materialDesign:Card UniformCornerRadius="0.1" Height="40" VerticalAlignment="Top" Background="#4CAF50" />
+                <StackPanel VerticalAlignment="Top" HorizontalAlignment="Right">
+                    <Button x:Name="buttonClose" 
+                                Margin="5"
+                                Width="30" 
+                                Height="30" 
+                                Padding="0" 
+                                Background="{x:Null}" 
+                                BorderBrush="{x:Null}" 
+                                ToolTip="Close">
+                        <materialDesign:PackIcon Kind="Close" Width="20" Height="20"/>
+                    </Button>
+                </StackPanel>
+
+                <!--dock panel start here-->
+                <DockPanel Margin="0,40,0,0">
+                    <DockPanel.Background>
+                        <ImageBrush ImageSource="/Assets/sdalogo.png" Stretch="Uniform" Opacity="0.2"/>
+                    </DockPanel.Background>
+                    <!--left
+                    
+                    <StackPanel DockPanel.Dock="Left" Width="700">
+                    </StackPanel>
+                    
+                    right two
+                    
+                    <StackPanel DockPanel.Dock="Right" Width="100" Height="auto" Margin="0,20,0,0">
+                    </StackPanel>-->
+
+                    <!--right one-->
+                    <StackPanel DockPanel.Dock="Right" Width="100">
+                        <StackPanel VerticalAlignment="Top">
+                          
+
+                            <Button Name="updateButton"
+                                        Style="{DynamicResource MaterialDesignFloatingActionButton}"
+                                        Margin="20"
+                                        Width="50" 
+                                        Height="50" 
+                                        Click="UpdateButton_Click"
+                                        ToolTip="Edit">
+                                <materialDesign:PackIcon Kind="Pencil" Width="30" Height="30"/>
+                            </Button>
+
+                            <Button x:Name="refreshButton" 
+                                        Style="{DynamicResource MaterialDesignFloatingActionButton}"
+                                        Padding="0"
+                                        Margin="20"
+                                        Width="50" 
+                                        Height="50"  
+                                        Click="RefreshButton_Click"  
+                                        ToolTip="Refresh">
+                                <materialDesign:PackIcon Kind="Refresh" Width="30" Height="30"/>
+                            </Button>
+
+                            <Button x:Name="SaveButton"
+                                    Visibility="Collapsed"
+                                    Style="{DynamicResource MaterialDesignFloatingActionButton}"
+                                    Margin="20"
+                                    Width="50" 
+                                    Height="50" 
+                                    Click="SaveButton_Click"
+                                    ToolTip="Save">
+                                <materialDesign:PackIcon Kind="ContentSave" Width="30" Height="30"/>
+                            </Button>
+
+                            <Button Name="deleteButton" Style="{DynamicResource MaterialDesignFloatingActionAccentButton}"
+                                    Visibility="Collapsed"
+                                        Margin="20"
+                                        Width="50" 
+                                        Height="50" 
+                                        Background="Salmon"
+                                        BorderBrush="Salmon"
+                                        Click="DeleteButton_Click"
+                                        ToolTip="Delete">
+                                <materialDesign:PackIcon Kind="Delete" Width="30" Height="30"/>
+                            </Button>
+                            
+                        </StackPanel>
+                    </StackPanel>
+
+                    <!--search-->
+                    <StackPanel DockPanel.Dock="Top" Width="auto" Height="auto" Margin="0,0,0,0">
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Top" Width="600">
+                            <Grid Margin="10" Height="auto">
+                                <materialDesign:Card Visibility="Collapsed" Width="auto"/>
+                                <StackPanel HorizontalAlignment="Center" Width="600" VerticalAlignment="Top">
+                                    <ComboBox Width="auto"
+                                      Style="{StaticResource MaterialDesignFilledComboBox}"
+                                      Margin="10"
+                                      IsEditable="True"
+                                      x:Name="titleSearchBack" 
+                                      Height="auto"
+                                      FontSize="20"
+                                      BorderThickness="1"
+                                      KeyUp="TitleSearchBack_KeyUp">
+                                        <materialDesign:HintAssist.Hint>
+                                            <StackPanel Orientation="Horizontal" Margin="-2 0 0 0">
+                                                <materialDesign:PackIcon Kind="Music"/>
+                                                <TextBlock Text="Himno Search"/>
+                                            </StackPanel>
+                                        </materialDesign:HintAssist.Hint>
+                                <ComboBox.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <VirtualizingStackPanel VirtualizingStackPanel.IsVirtualizing="True" VirtualizingStackPanel.VirtualizationMode="Recycling"/>
+                                    </ItemsPanelTemplate>
+                                </ComboBox.ItemsPanel>    
+                                    </ComboBox>
+                                    <!--
+                                    <TextBox  Name="addTitle" BorderThickness="1" Width="auto" Style="{StaticResource MaterialDesignFilledTextFieldTextBox}" FontSize="20" Height="auto">
+                                        <materialDesign:HintAssist.Hint>
+                                            <StackPanel
+                                                  Orientation="Horizontal"
+                                                  Margin="-2 0 0 0">
+                                                <materialDesign:PackIcon
+                                                    Kind="Music" />
+                                                <TextBlock
+                                                    Text="Add Title" />
+                                            </StackPanel>
+                                        </materialDesign:HintAssist.Hint>
+                                    </TextBox>
+                                    -->
+                                    <!--<TextBox Name="searchLastname" Margin="0,0,20,0" Width="200" BorderThickness="1" materialDesign:HintAssist.Hint="Search Lastname" Style="{StaticResource MaterialDesignFloatingHintTextBox}"  FontSize="15" Height="auto" TextChanged="searchLastname_TextChanged"/>-->
+                                </StackPanel>
+                            </Grid>
+                        </StackPanel>
+                        
+                        <StackPanel Margin="0" Width="600" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+                            <TextBox Name="addContent" 
+                                     ToolTip="Click to edit" 
+                                     BorderThickness="0" 
+                                     Height="auto" 
+                                     FontSize="15" 
+                                     Width="auto" 
+                                     AcceptsReturn="True" 
+                                     Margin="10" 
+                                     TextWrapping="Wrap"/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal" Height="auto" Visibility="Hidden">
+                            <TextBox Margin="10"
+                                    Name="bindTitleBack"
+                                    HorizontalAlignment="Center"
+                                    Height="auto" 
+                                    Width="auto"
+                                    TextWrapping="Wrap"
+                                    VerticalAlignment="Top" 
+                                    materialDesign:HintAssist.Hint="Bind Title" Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                    BorderThickness="1" 
+                                    TextChanged="BindTitleBack_TextChanged"
+                                    Text="{Binding ElementName=titleSearchBack, Path=Text}"/>
+                            <TextBox Margin="10"
+                                    Name="id"
+                                    HorizontalAlignment="Center"
+                                    Height="auto" Width="auto"
+                                    TextWrapping="Wrap"
+                                    VerticalAlignment="Top" 
+                                    materialDesign:HintAssist.Hint="Hymn Database No." 
+                                    Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                    BorderThickness="1"/>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <!--datagrid-->
+                    <StackPanel DockPanel.Dock="Bottom" Height="auto" Width="auto">
+                        <StackPanel HorizontalAlignment="Center" Width="600" VerticalAlignment="Bottom">
+                            <DataGrid Visibility="Collapsed" 
+                                      IsReadOnly="True" 
+                                      EnableRowVirtualization="True" 
+                                      EnableColumnVirtualization="True" 
+                                      Name="db_hymnal" 
+                                      Margin="10" 
+                                      Width="auto" 
+                                      Height="200" 
+                                      SelectionChanged="Db_hymnal_SelectionChanged" />
+                        </StackPanel>
+                    </StackPanel>
+                </DockPanel>
+            </Grid>
+        </Grid>
+    </materialDesign:DialogHost>
+</Window>
